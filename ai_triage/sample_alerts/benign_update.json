@@ -1,0 +1,23 @@
+{
+  "alert_id": "ARGUS-0003",
+  "detected_at": "2026-10-04T09:03:55-04:00",
+  "rule": {
+    "title": "Process made outbound connection shortly after writing files",
+    "id": "argus-net-anom-014",
+    "level": "medium",
+    "mitre": ["T1048"]
+  },
+  "host": { "name": "MBP-OPS-02", "os": "macOS 15" },
+  "identity": { "user": "ysong", "logon_type": "interactive" },
+  "event": {
+    "action": "outbound_connection",
+    "process": "softwareupdated",
+    "process_signature": "Apple Inc. (signed, notarized)",
+    "command_line": "/usr/libexec/softwareupdated",
+    "destination_domain": "swcdn.apple.com",
+    "destination_ip": "17.253.17.206",
+    "bytes": 5321,
+    "file_tag": null,
+    "notes": "Signed Apple system binary contacting a known Apple update endpoint."
+  }
+}

@@ -1,0 +1,25 @@
+{
+  "alert_id": "ARGUS-0001",
+  "detected_at": "2026-10-03T23:47:12-04:00",
+  "rule": {
+    "title": "CONFIDENTIAL-tagged files copied to removable media",
+    "id": "argus-usb-exfil-001",
+    "level": "high",
+    "mitre": ["T1052.001"]
+  },
+  "host": { "name": "WIN11-FIN-03", "os": "Windows 11" },
+  "identity": { "user": "svc_reporting", "logon_type": "after_hours" },
+  "event": {
+    "action": "file_copy_to_removable",
+    "process": "explorer.exe",
+    "source_paths": [
+      "C:\\Finance\\Q3\\payroll_CONFIDENTIAL.xlsx",
+      "C:\\Finance\\Q3\\ssn_export_CONFIDENTIAL.csv"
+    ],
+    "destination": "E:\\  (USBSTOR\\VendorX_64GB)",
+    "bytes": 48213344,
+    "file_count": 2,
+    "file_tag": "CONFIDENTIAL",
+    "time_local": "23:47 (outside business hours)"
+  }
+}

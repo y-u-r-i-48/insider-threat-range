@@ -1,0 +1,33 @@
+title: Confidential Data Copied to Removable Media
+id: argus-usb-exfil-001
+status: experimental
+description: >
+  Detects a file tagged CONFIDENTIAL or LEGAL-HOLD being written to a removable
+  storage device. Maps to insider data-exfiltration over USB and to the
+  removable-media monitoring duty in the Samsung JD.
+author: Yuri Son
+date: 2026/10/04
+references:
+  - THREAT-MODEL.md  # classic USB exfil + removable-media policy
+tags:
+  - attack.exfiltration
+  - attack.t1052.001          # Exfiltration over USB
+logsource:
+  product: argus
+  service: endpoint
+detection:
+  selection:
+    action: file_write
+    destination_type: removable
+    file_tag:
+      - CONFIDENTIAL
+      - LEGAL-HOLD
+  condition: selection
+fields:
+  - user
+  - target_file
+  - destination
+  - host
+falsepositives:
+  - Approved, encrypted backup drives on an allowlist (tune with a filter block)
+level: high
