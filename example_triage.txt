@@ -1,0 +1,66 @@
+Last login: Sat Oct  3 11:42:39 on console
+(base) yurison@Yuris-MacBook-Air ~ % cd 
+(base) yurison@Yuris-MacBook-Air ~ % /Users/yurison/Downloads/project1/ai_triage 
+zsh: permission denied: /Users/yurison/Downloads/project1/ai_triage
+(base) yurison@Yuris-MacBook-Air ~ % cd /Users/yurison/Downloads/project1/ai_triage
+(base) yurison@Yuris-MacBook-Air ai_triage % python3 triage.py --all --mock
+====================================================================
+ALERT  ARGUS-0003  |  Process made outbound connection shortly after writing files
+engine: mock
+--------------------------------------------------------------------
+  classification : benign_false_positive
+  severity       : informational [.]
+  verdict        : false_positive
+  confidence     : 0.55
+  reasoning      : Heuristic: signed vendor process to a known update domain, no tagged data.
+  actions        :
+      - Tune the rule to allowlist this signed updater
+====================================================================
+
+====================================================================
+ALERT  ARGUS-0002  |  Tagged data uploaded to external file-sharing host
+engine: mock
+--------------------------------------------------------------------
+  classification : data_exfiltration
+  severity       : high [!]
+  verdict        : true_positive
+  confidence     : 0.60
+  reasoning      : Heuristic: tagged sensitive data moving to removable media or a file-sharing host.
+  actions        :
+      - Isolate the host
+      - Disable the identity
+      - Preserve the artifact
+  mitre          : T1052.001
+====================================================================
+
+====================================================================
+ALERT  ARGUS-0004  |  Sensitive file read by unusual process
+engine: mock
+--------------------------------------------------------------------
+  classification : other
+  severity       : medium [~]
+  verdict        : needs_investigation
+  confidence     : 0.30
+  reasoning      : Heuristic could not classify confidently; manual review needed.
+  actions        :
+      - Review raw event
+      - Check identity's baseline behavior
+====================================================================
+
+====================================================================
+ALERT  ARGUS-0001  |  CONFIDENTIAL-tagged files copied to removable media
+engine: mock
+--------------------------------------------------------------------
+  classification : data_exfiltration
+  severity       : high [!]
+  verdict        : true_positive
+  confidence     : 0.60
+  reasoning      : Heuristic: tagged sensitive data moving to removable media or a file-sharing host.
+  actions        :
+      - Isolate the host
+      - Disable the identity
+      - Preserve the artifact
+  mitre          : T1052.001
+====================================================================
+
+(base) yurison@Yuris-MacBook-Air ai_triage % 
